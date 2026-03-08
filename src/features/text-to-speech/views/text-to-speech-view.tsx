@@ -1,3 +1,4 @@
+import { SettingsPanel } from "@/features/text-to-speech/components/settings-panel";
 import { TextInputPanel } from "@/features/text-to-speech/components/text-input-panel";
 import { VoicePreviewPlaceholder } from "@/features/text-to-speech/components/voice-preview-placeholder";
 
@@ -8,6 +9,7 @@ export function TextToSpeechView() {
         <TextInputPanel />
         <VoicePreviewPlaceholder />
       </div>
+      <SettingsPanel />
     </div>
   );
 }
