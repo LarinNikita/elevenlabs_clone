@@ -12,6 +12,7 @@ import {
   Volume2Icon,
   SettingsIcon,
   HeadphonesIcon,
+  BookOpenIcon,
 } from "lucide-react";
 
 import { Skeleton } from "@/components/ui/skeleton";
@@ -119,6 +120,11 @@ export function DashboardSidebar() {
       title: "Settings",
       icon: SettingsIcon,
       onClick: () => clerk.openOrganizationProfile(),
+    },
+    {
+      title: "Docs",
+      icon: BookOpenIcon,
+      url: "/docs",
     },
     {
       title: "Help and support",
