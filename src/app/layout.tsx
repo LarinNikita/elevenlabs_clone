@@ -5,6 +5,7 @@ import { Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const inter = Inter({
   variable: "--font-geist-sans",
@@ -31,7 +32,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${geistMono.variable} antialiased`}>
         <ClerkProvider>
-          {children}
+          <TooltipProvider>{children}</TooltipProvider>
           <Toaster />
         </ClerkProvider>
       </body>
