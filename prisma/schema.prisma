@@ -20,7 +20,7 @@ enum VoiceVariant {
 
 enum VoiceCategory {
   AUDIOBOOK
-  CONVERSATION
+  CONVERSATIONAL
   CUSTOMER_SERVICE
   GENERAL
   NARRATIVE
