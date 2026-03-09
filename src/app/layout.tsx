@@ -4,6 +4,8 @@ import { Inter, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
 
+import { TRPCReactProvider } from "@/trpc/client";
+
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
@@ -35,8 +37,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${geistMono.variable} antialiased`}>
         <ClerkProvider>
-          <TooltipProvider>{children}</TooltipProvider>
-          <Toaster />
+          <TRPCReactProvider>
+            <TooltipProvider>{children}</TooltipProvider>
+            <Toaster />
+          </TRPCReactProvider>
         </ClerkProvider>
       </body>
     </html>
