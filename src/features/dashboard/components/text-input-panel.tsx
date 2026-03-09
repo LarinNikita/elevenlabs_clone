@@ -5,7 +5,10 @@ import { useState } from "react";
 import { CoinsIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-import { TEXT_MAX_LENGTH } from "@/features/text-to-speech/data/constants";
+import {
+  COST_PER_CHARACTER,
+  TEXT_MAX_LENGTH,
+} from "@/features/text-to-speech/data/constants";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -43,7 +46,7 @@ export function TextInputPanel() {
                 ) : (
                   <>
                     <span className="tabular-nums">
-                      ${(text.length * 0.0003).toFixed(4)}
+                      ${(text.length * COST_PER_CHARACTER).toFixed(4)}
                     </span>{" "}
                     estimated
                   </>

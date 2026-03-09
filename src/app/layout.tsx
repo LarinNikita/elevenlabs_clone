@@ -18,7 +18,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ElevenLabs Clone",
+  title: {
+    default: "ElevenLabs Clone",
+    template: "%s | ElevenLabs Clone",
+  },
   description:
     "An AI-powered text-to-speech platform that lets users create, edit, and share voice content.",
 };
