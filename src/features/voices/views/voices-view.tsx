@@ -1,14 +1,19 @@
 "use client";
 
+import { useQueryState } from "nuqs";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { VoicesList } from "../components/voices-list";
+import { VoicesToolbar } from "../components/voices-toolbar";
+
+import { voicesSearchParams } from "../lib/params";
 
 import { useTRPC } from "@/trpc/client";
 
 function VoicesContent() {
   const trpc = useTRPC();
-  const { data } = useSuspenseQuery(trpc.voices.getAll.queryOptions());
+  const [query] = useQueryState("query", voicesSearchParams.query);
+  const { data } = useSuspenseQuery(trpc.voices.getAll.queryOptions({ query }));
 
   return (
     <>
@@ -21,6 +26,7 @@ function VoicesContent() {
 export function VoicesView() {
   return (
     <div className="flex-1 space-y-10 overflow-y-auto p-3 lg:p-6">
+      <VoicesToolbar />
       <VoicesContent />
     </div>
   );
