@@ -6,7 +6,8 @@ import { TTSVoiceProvider } from "../context/tts-voices-context";
 
 import { SettingsPanel } from "@/features/text-to-speech/components/settings-panel";
 import { TextInputPanel } from "@/features/text-to-speech/components/text-input-panel";
-import { VoicePreviewPlaceholder } from "@/features/text-to-speech/components/voice-preview-placeholder";
+import { VoicePreviewPanel } from "@/features/text-to-speech/components/voice-preview-panel";
+import { VoicePreviewMobile } from "@/features/text-to-speech/components/voice-preview-mobile";
 import {
   TextToSpeechForm,
   type TTSFormValues,
@@ -59,7 +60,16 @@ export function TextToSpeechDetailView({
         <div className="flex min-h-0 flex-1 overflow-hidden">
           <div className="flex min-h-0 flex-1 flex-col">
             <TextInputPanel />
-            <VoicePreviewPlaceholder />
+            <VoicePreviewPanel
+              audioUrl={data.audioUrl}
+              voice={generationVoice}
+              text={data.text}
+            />
+            <VoicePreviewMobile
+              audioUrl={data.audioUrl}
+              voice={generationVoice}
+              text={data.text}
+            />
           </div>
           <SettingsPanel />
         </div>
