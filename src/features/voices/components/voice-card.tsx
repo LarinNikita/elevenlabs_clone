@@ -4,6 +4,8 @@ import { MicIcon, MoreHorizontalIcon, PauseIcon, PlayIcon } from "lucide-react";
 
 import { VOICE_CATEGORY_LABELS } from "../data/voice-categories";
 
+import { useAudioPlayback } from "@/hooks/use-audio-playback";
+
 import { AppRouter } from "@/trpc/routers/_app";
 
 import { Button } from "@/components/ui/button";
@@ -13,8 +15,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
@@ -41,11 +41,10 @@ function parseLanguage(locale: string) {
 }
 
 export function VoiceCard({ voice }: VoiceCardProps) {
-  const isLoading = false;
-  const isPlaying = false;
   const { flag, region } = parseLanguage(voice.language);
 
   const audioSrc = `/api/voices/${encodeURIComponent(voice.id)}`;
+  const { isPlaying, isLoading, togglePlay } = useAudioPlayback(audioSrc);
 
   return (
     <div className="flex items-center gap-1 overflow-hidden rounded-xl border pr-3 lg:pr-6">
@@ -85,7 +84,7 @@ export function VoiceCard({ voice }: VoiceCardProps) {
           variant="outline"
           size="icon-sm"
           className="rounded-full"
-          onClick={() => {}}
+          onClick={togglePlay}
           disabled={isLoading}
         >
           {isLoading ? (
