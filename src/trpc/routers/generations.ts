@@ -141,7 +141,7 @@ export const generationsRouter = createTRPCRouter({
         });
 
         generationId = generation.id;
-        r2ObjectKey = `generations/${ctx.orgId}/${generation.id}`;
+        r2ObjectKey = `generations/orgs/${ctx.orgId}/${generation.id}`;
 
         await uploadAudio({ buffer, key: r2ObjectKey });
 
@@ -163,7 +163,6 @@ export const generationsRouter = createTRPCRouter({
             })
             .catch(() => {});
         }
-
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "Failed to store generation audio",

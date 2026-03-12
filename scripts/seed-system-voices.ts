@@ -1,8 +1,9 @@
 import "dotenv/config";
-import { z } from "zod";
-import path from "node:path";
+
 import fs from "node:fs/promises";
+import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { z } from "zod";
 import { PrismaPg } from "@prisma/adapter-pg";
 import {
   PutObjectCommand,
@@ -24,10 +25,9 @@ const SYSTEM_VOICES_DIR = path.join(
 
 const envSchema = z.object({
   DATABASE_URL: z.string().min(1),
-  S3_ACCOUNT_ID: z.string().min(1),
-  S3_ACCESS_KEY_ID: z.string().min(1),
-  S3_SECRET_ACCESS_KEY: z.string().min(1),
-  S3_BUCKET_NAME: z.string().min(1),
+  R2_ACCESS_KEY_ID: z.string().min(1),
+  R2_SECRET_ACCESS_KEY: z.string().min(1),
+  R2_BUCKET_NAME: z.string().min(1),
 });
 
 const env = envSchema.parse(process.env);
@@ -35,12 +35,13 @@ const env = envSchema.parse(process.env);
 const adapter = new PrismaPg({ connectionString: env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
 
-const s3 = new S3Client({
+const r2 = new S3Client({
   region: "us-east-1",
-  endpoint: `http://localhost:9000`,
+  endpoint: "http://localhost:9000",
+  forcePathStyle: true,
   credentials: {
-    accessKeyId: env.S3_ACCESS_KEY_ID,
-    secretAccessKey: env.S3_SECRET_ACCESS_KEY,
+    accessKeyId: env.R2_ACCESS_KEY_ID,
+    secretAccessKey: env.R2_SECRET_ACCESS_KEY,
   },
 });
 
@@ -170,13 +171,13 @@ async function uploadSystemVoiceAudio({
   contentType: string;
 }) {
   const commandInput: PutObjectCommandInput = {
-    Bucket: env.S3_BUCKET_NAME,
+    Bucket: env.R2_BUCKET_NAME,
     Key: key,
     Body: buffer,
     ContentType: contentType,
   };
 
-  await s3.send(new PutObjectCommand(commandInput));
+  await r2.send(new PutObjectCommand(commandInput));
 }
 
 async function seedSystemVoice(name: string) {

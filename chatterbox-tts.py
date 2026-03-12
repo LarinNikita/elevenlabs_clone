@@ -17,10 +17,10 @@ from fastapi.security import APIKeyHeader
 from pydantic import BaseModel, Field
 
 # 📁 Конфигурация S3/R2 — настройте здесь
-R2_BUCKET_NAME = os.environ.get("R2_BUCKET_NAME", "voices")
+R2_BUCKET_NAME = os.environ.get("R2_BUCKET_NAME", "elevenlabs")
 R2_ENDPOINT_URL = os.environ.get("R2_ENDPOINT_URL", "http://localhost:9000")
 R2_ACCESS_KEY = os.environ.get("AWS_ACCESS_KEY_ID", "readwrite-user")
-R2_SECRET_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "readwrite-secret")
+R2_SECRET_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "my-secret-key")
 R2_REGION = os.environ.get("AWS_REGION", "us-east-1")
 
 # 🔑 API ключ для защиты (аналог CHATTERBOX_API_KEY)
