@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -14,6 +16,8 @@ import {
   HeadphonesIcon,
   BookOpenIcon,
 } from "lucide-react";
+
+import { VoiceCreatorDialog } from "@/features/voices/components/voice-creator-dialog";
 
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -30,8 +34,6 @@ import {
   SidebarRail,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { VoiceCreatorDialog } from "@/features/voices/components/voice-creator-dialog";
-import { useState } from "react";
 
 interface MenuItem {
   title: string;
