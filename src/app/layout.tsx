@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Inter, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
@@ -38,7 +39,9 @@ export default function RootLayout({
       <body className={`${inter.variable} ${geistMono.variable} antialiased`}>
         <ClerkProvider>
           <TRPCReactProvider>
-            <TooltipProvider>{children}</TooltipProvider>
+            <TooltipProvider>
+              <NuqsAdapter>{children}</NuqsAdapter>
+            </TooltipProvider>
             <Toaster />
           </TRPCReactProvider>
         </ClerkProvider>
