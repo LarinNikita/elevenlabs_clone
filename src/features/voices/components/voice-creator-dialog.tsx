@@ -1,5 +1,8 @@
 import { useIsMobile } from "@/hooks/use-mobile";
 
+import { VoiceCreateForm } from "./voice-create-form";
+
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -10,8 +13,10 @@ import {
 } from "@/components/ui/dialog";
 import {
   Drawer,
+  DrawerClose,
   DrawerContent,
   DrawerDescription,
+  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -37,10 +42,22 @@ export function VoiceCreatorDialog({
         <DrawerContent>
           <DrawerHeader>
             <DrawerTitle>Create custom voice</DrawerTitle>
+            <DrawerDescription>
+              Upload or record an audio sample to add a new voice to your
+              library.
+            </DrawerDescription>
           </DrawerHeader>
-          <DrawerDescription>
-            Upload or record an audio sample to add a new voice to your library.
-          </DrawerDescription>
+          <VoiceCreateForm
+            scrollable
+            footer={(submit) => (
+              <DrawerFooter>
+                {submit}
+                <DrawerClose asChild>
+                  <Button variant="outline">Cancel</Button>
+                </DrawerClose>
+              </DrawerFooter>
+            )}
+          />
         </DrawerContent>
       </Drawer>
     );
@@ -56,6 +73,7 @@ export function VoiceCreatorDialog({
             Upload or record an audio sample to add a new voice to your library.
           </DialogDescription>
         </DialogHeader>
+        <VoiceCreateForm />
       </DialogContent>
     </Dialog>
   );
